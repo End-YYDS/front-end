@@ -14,7 +14,7 @@ const generateUsers = () => {
   return users;
 };
 
-const users = generateUsers();
+export const users = generateUsers();
 console.log(users);
 
 const ITEMS_PER_PAGE = 24;

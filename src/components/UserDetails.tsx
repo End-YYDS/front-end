@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
+import { users } from './Dashboard';
+
 
 interface UserDetailsProps {
     userId: number; // 使用者 ID
     onBack: () => void; // 回調函數，返回上一頁
 }
 
-const UserDetails: React.FC<UserDetailsProps> = ({ onBack }) => {
+const UserDetails: React.FC<UserDetailsProps> = ({ userId, onBack }) => {
+    const [username, setUsername] = useState<string>("");
+
+    useEffect(() => {
+        const fetchData = () => {
+            const user = users.find((u) => u.id === userId); // 查找對應 userId 的用戶
+            if (user) {
+                setUsername(user.name);
+            } else {
+                setUsername("Unknown User");
+            }
+        };
+
+        fetchData();
+    }, [userId]); // 當 userId 改變時重新加載名稱
+
   const systemInfo = {
     cpu: 60,
     realMemory: 35,
@@ -37,13 +54,15 @@ const UserDetails: React.FC<UserDetailsProps> = ({ onBack }) => {
     <div className="p-4 bg-gray-100 min-h-screen">
       {/* Header */}
       <div className="flex items-center mb-6">
-      <button
-    onClick={onBack}
-    className="p-2 bg-gray-200 rounded hover:bg-gray-400 transition flex items-center justify-center"
-    >
-    <ArrowUturnLeftIcon className="h-5 w-5 text-gray-700" />
-    </button>
-        <h1 className="text-xl font-bold ml-4">Alen</h1>
+        <button
+            onClick={onBack}
+            className="p-2 bg-gray-200 rounded hover:bg-gray-400 transition flex items-center justify-center"
+        >
+            <ArrowUturnLeftIcon className="h-5 w-5 text-gray-700" />
+        </button>
+        <h1 className="text-xl font-bold ml-4">
+            ID-{userId} {username ? `(${username})` : "Loading..."}
+        </h1>
       </div>
 
       {/* System Information */}
