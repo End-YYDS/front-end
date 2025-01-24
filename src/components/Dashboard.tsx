@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 
 // 產生使用者
 const generateUsers = () => {
@@ -18,10 +17,13 @@ const generateUsers = () => {
 const users = generateUsers();
 console.log(users);
 
-
 const ITEMS_PER_PAGE = 24;
 
-const Dashboard = () => {
+interface DashboardProps {
+  onUserClick: (id: number) => void; // 點擊使用者按鈕時觸發的回調
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ onUserClick }) => {
   const [sortAZ, setSortAZ] = useState(false);
   const [sortByLight, setSortByLight] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,6 +90,7 @@ const Dashboard = () => {
         {paginatedUsers.map((user, index) => (
           <button
             key={index}
+            onClick={() => onUserClick(user.id)} // 傳遞使用者 ID
             className="flex items-center justify-between p-4 border rounded-lg bg-white shadow-md text-black"
             title={user.name} // todo 滑鼠移上時顯示完整名稱(還沒)
           >
@@ -104,7 +107,7 @@ const Dashboard = () => {
         ))}
       </div>
       
-      <div className='mt-6 flex justify-center'>
+      <div className='mt-auto flex justify-between pt-4'>
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}

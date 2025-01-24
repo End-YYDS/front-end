@@ -45,7 +45,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
   return (
     <div
       {...bind()}
-      className={`fixed inset-y-0 left-0 p-4 text-white bg-navbar transform overflow-y-auto ${
+      className={`fixed z-50 inset-y-0 left-0 p-4 text-white bg-navbar transform overflow-y-auto ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } transition-transform duration-300 md:static md:translate-x-0 md:w-80`}
     >

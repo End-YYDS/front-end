@@ -57,7 +57,11 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
         <div className='flex items-center'>
           <button
             className='flex items-center cursor-pointer'
-            onClick={() => setProfileOpen(!profileOpen)}
+            onClick={() => {setProfileOpen(!profileOpen);
+              if (notificationsOpen) {
+                setNotificationsOpen(false); // 當 profile 彈出框開啟時關閉通知框
+              }
+            }}
           >
             <span className='mr-[2px] text-black text-xs sm:text-base'>{User.name}</span>
             <img src={Down_Arrow} className='object-contain w-8 h-8' />
@@ -66,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
 
         {/* 顯示通知彈出框 */}
         {notificationsOpen && (
-          <div className="absolute right-10 sm:right-36 top-14 bg-white bg-opacity-95 border border-gray-200 rounded-lg shadow-lg w-48 max-h-64 overflow-y-auto">
+          <div className="absolute right-10 z-50 sm:right-36 top-14 bg-white bg-opacity-95 border border-gray-200 rounded-lg shadow-lg w-48 max-h-64 overflow-y-auto">
             <ul>
               {notifications.map((notification, index) => (
                 <React.Fragment key={index}>
@@ -112,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
 
         {/* 顯示使用者名稱彈出框 */}
         {profileOpen && (
-          <div className='absolute right-4 top-14 bg-white bg-opacity-95 border border-gray-200 rounded-lg shadow-lg w-36'>
+          <div className='absolute right-4 z-50 top-14 bg-white bg-opacity-95 border border-gray-200 rounded-lg shadow-lg w-36'>
             <ul>
               <li
                 className='p-3 hover:bg-gray-100 cursor-pointer'
