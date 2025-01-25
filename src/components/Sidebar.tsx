@@ -45,7 +45,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
   return (
     <div
       {...bind()}
-      className={`fixed inset-y-0 left-0 p-4 text-white bg-navbar transform overflow-y-auto ${
+      className={`fixed z-50 inset-y-0 left-0 p-4 text-white bg-navbar transform overflow-y-auto ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       } transition-transform duration-300 md:static md:translate-x-0 md:w-80`}
     >
@@ -66,7 +66,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             onClick={() => handlePageChange('Dashboard')}
           >
             <HomeIcon className='w-5 h-5' />
-            <span>Dashboard</span>
+            <span className='flex-grow'>Dashboard</span>
           </a>
         </li>
         <li className='mb-2'>
@@ -79,7 +79,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <CogIcon className='w-5 h-5' />
-            <span>Services</span>
+            <span className='flex-grow'>Services</span>
             <span>{isServicesOpen ? '▼' : '▶'}</span>
           </a>
           {isServicesOpen && (
@@ -104,7 +104,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             onClick={() => handlePageChange('CHM')}
           >
             <ComputerDesktopIcon className='w-5 h-5' />
-            <span>CHM</span>
+            <span className='flex-grow'>CHM</span>
           </a>
         </li>
         <li className='mb-2'>
@@ -117,7 +117,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <CubeIcon className='w-5 h-5' />
-            <span>Modules Configuration</span>
+            <span className='flex-grow'>Modules Configuration</span>
             <span>{isModulesOpen ? '▼' : '▶'}</span>
           </a>
           {isModulesOpen && (
@@ -144,7 +144,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <PowerIcon className='w-5 h-5' />
-            <span>Bootup & Shutdown</span>
+            <span className='flex-grow'>Bootup & Shutdown</span>
             <span>{isBootupOpen ? '▼' : '▶'}</span>
           </a>
           {isBootupOpen && (
@@ -171,7 +171,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <UserIcon className='w-5 h-5' />
-            <span>Users & Groups</span>
+            <span className='flex-grow'>Users & Groups</span>
             <span>{isUsersOpen ? '▼' : '▶'}</span>
           </a>
           {isUsersOpen && (
@@ -198,7 +198,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <ServerIcon className='w-5 h-5' />
-            <span>Disk Management</span>
+            <span className='flex-grow'>Disk Management</span>
             <span>{isDiskOpen ? '▼' : '▶'}</span>
           </a>
           {isDiskOpen && (
@@ -225,7 +225,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <ClockIcon className='w-5 h-5' />
-            <span>Cron Management</span>
+            <span className='flex-grow'>Cron Management</span>
             <span>{isCronOpen ? '▼' : '▶'}</span>
           </a>
           {isCronOpen && (
@@ -252,7 +252,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <ArrowDownTrayIcon className='w-5 h-5' />
-            <span>Software Package</span>
+            <span className='flex-grow'>Software Package</span>
             <span>{isSoftwareOpen ? '▼' : '▶'}</span>
           </a>
           {isSoftwareOpen && (
@@ -276,7 +276,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             onClick={() => handlePageChange('System Logs')}
           >
             <BookOpenIcon className='w-5 h-5' />
-            <span>System Logs</span>
+            <span className='flex-grow'>System Logs</span>
           </a>
         </li>
         <li className='mb-2'>
@@ -289,7 +289,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <ServerStackIcon className='w-5 h-5' />
-            <span>Servers</span>
+            <span className='flex-grow'>Servers</span>
             <span>{isServersOpen ? '▼' : '▶'}</span>
           </a>
           {isServersOpen && (
@@ -316,7 +316,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <WrenchIcon className='w-5 h-5' />
-            <span>Utils</span>
+            <span className='flex-grow'>Utils</span>
             <span>{isUtilsOpen ? '▼' : '▶'}</span>
           </a>
           {isUtilsOpen && (
@@ -343,7 +343,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <GlobeAltIcon className='w-5 h-5' />
-            <span>Networks</span>
+            <span className='flex-grow'>Networks</span>
             <span>{isNetworksOpen ? '▼' : '▶'}</span>
           </a>
           {isNetworksOpen && (
@@ -370,7 +370,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, setCurrentPage }) => {
             }}
           >
             <CpuChipIcon className='w-5 h-5' />
-            <span>Hardware</span>
+            <span className='flex-grow'>Hardware</span>
             <span>{isHardwareOpen ? '▼' : '▶'}</span>
           </a>
           {isHardwareOpen && (
