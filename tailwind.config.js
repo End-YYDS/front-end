@@ -9,6 +9,7 @@ export default {
         //   dimWhite: 'rgba(255, 255, 255, 0.7)',
         //   dimBlue: 'rgba(9, 151, 124, 0.1)',
         navbar: '#0E1726',
+        head_gray: '#D9D9D9'
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],

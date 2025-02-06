@@ -1,6 +1,7 @@
 import { Sidebar, Navbar } from './components';
 import Dashboard from './components/Dashboard.tsx'; // 引入 Dashboard 組件
 import UserDetails from './components/UserDetails'; // 引入 UserDetails 組件
+import Software from './components/Software';
 import { useState } from 'react';
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
               <p>This is the Services page.</p>
             </div>
           )}
+          {currentPage === 'Software Package' && <Software />}
         </div>
       </div>
     </div>
