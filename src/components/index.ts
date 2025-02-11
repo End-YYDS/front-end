@@ -1,3 +1,6 @@
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-export { Sidebar, Navbar };
+import Dashboard from './Dashboard';
+import UserDetails from './UserDetails';
+import Software from './Software';
+export { Sidebar, Navbar, Dashboard, UserDetails, Software };
