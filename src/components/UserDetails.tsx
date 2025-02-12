@@ -48,6 +48,11 @@ const UserDetails: React.FC<UserDetailsProps> = ({ userId, onBack }) => {
       { ip: '127.0.0.1', lastActive: '05/16/2024 02:20 PM', state: 'This login' },
       { ip: '127.0.0.1', lastActive: '05/12/2024 02:30 PM', state: 'Logged out' },
     ],
+    diskUsage: [
+      { mountedAs: "/", type: "ext4", free: "42%(18.97GiB)\n83%(2608850 inodes)", used: "25.99 GiB\n569646 inodes", total: "80GB", deviceId: "/dev/disk/by-id/dm-uuid-LV-n..." },
+      { mountedAs: "/boot", type: "ext4", free: "85%(1.53GiB)\n100%(130812 inodes)", used: "260.39 MiB\n260 inodes", total: "1.9 GiB\n131072 inodes", deviceId: "/dev/disk/by-uuid/16fe292e-6..." },
+      { mountedAs: "/boot/efi", type: "vfat", free: "99%(1.04GiB)", used: "6.3 MiB", total: "1.04 GiB", deviceId: "/dev/disk/by-uuid/6674-0689" },
+    ],
   };
 
   return (
@@ -100,31 +105,31 @@ const UserDetails: React.FC<UserDetailsProps> = ({ userId, onBack }) => {
 
         <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
           <div>
-            <p>System hostname: {systemInfo.details.hostname}</p>
-            <p>Webmin version: {systemInfo.details.webminVersion}</p>
-            <p>Time on system: {systemInfo.details.timeOnSystem}</p>
-            <p>System uptime: {systemInfo.details.uptime}</p>
-            <p>CPU load averages: {systemInfo.details.cpuLoad}</p>
+            <p>System hostname: {systemInfo.details.hostname || "N/A"}</p>
+            <p>Webmin version: {systemInfo.details.webminVersion || "N/A"}</p>
+            <p>Time on system: {systemInfo.details.timeOnSystem || "N/A"}</p>
+            <p>System uptime: {systemInfo.details.uptime || "N/A"}</p>
+            <p>CPU load averages: {systemInfo.details.cpuLoad || "N/A"}</p>
           </div>
           <div>
-            <p>Operating system: {systemInfo.details.os}</p>
-            <p>Authentic theme version: {systemInfo.details.themeVersion}</p>
-            <p>Kernel and CPU: {systemInfo.details.kernel}</p>
-            <p>Running processes: {systemInfo.details.runningProcesses}</p>
-            <p>Real memory: {systemInfo.details.realMemoryUsage}</p>
-            <p>Local disk space: {systemInfo.details.diskSpaceUsage}</p>
+            <p>Operating system: {systemInfo.details.os || "N/A"}</p>
+            <p>Authentic theme version: {systemInfo.details.themeVersion || "N/A"}</p>
+            <p>Kernel and CPU: {systemInfo.details.kernel || "N/A"}</p>
+            <p>Running processes: {systemInfo.details.runningProcesses || "N/A"}</p>
+            <p>Real memory: {systemInfo.details.realMemoryUsage || "N/A"}</p>
+            <p>Local disk space: {systemInfo.details.diskSpaceUsage || "N/A"}</p>
           </div>
         </div>
       </div>
 
       {/* Stats History */}
-      <div className="bg-white shadow-md rounded p-4 mb-4">
+      <div className="bg-white shadow-md rounded p-4 mb-6">
         <h2 className="font-bold text-lg border-b pb-2 mb-4">Stats History</h2>
         <p className="text-gray-500">Loading...</p>
       </div>
 
       {/* Recent Logins */}
-      <div className="bg-white shadow-md rounded p-4">
+      <div className="bg-white shadow-md rounded p-4 mb-6">
         <h2 className="font-bold text-lg border-b pb-2 mb-4">Recent Logins</h2>
         <table className="table-auto w-full text-sm">
           <thead>
@@ -138,9 +143,9 @@ const UserDetails: React.FC<UserDetailsProps> = ({ userId, onBack }) => {
           <tbody>
             {systemInfo.recentLogins.map((login, index) => (
               <tr key={index} className="hover:bg-gray-100">
-                <td className="border px-4 py-2">{login.ip}</td>
-                <td className="border px-4 py-2">{login.lastActive}</td>
-                <td className="border px-4 py-2">{login.state}</td>
+                <td className="border px-4 py-2">{login.ip || "N/A"}</td>
+                <td className="border px-4 py-2">{login.lastActive || "N/A"}</td>
+                <td className="border px-4 py-2">{login.state || "N/A"}</td>
                 <td className="border px-4 py-2">
                   <button className="p-1 bg-gray-200 rounded text-xs hover:bg-gray-400 transition">
                     View logs
@@ -153,6 +158,56 @@ const UserDetails: React.FC<UserDetailsProps> = ({ userId, onBack }) => {
         <button className="mt-4 p-2 bg-gray-200 rounded text-sm hover:bg-gray-400 transition">
           All sessions
         </button>
+      </div>
+
+      {/* Disk Usage */}
+      <div className="bg-white shadow-md rounded p-4">
+        <h2 className="font-bold text-lg border-b pb-2 mb-4">Disk Usage</h2>
+        <table className="table-auto w-full text-sm">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border px-4 py-2 text-left">Mounted As</th>
+              <th className="border px-4 py-2 text-left">Type</th>
+              <th className="border px-4 py-2 text-left">Free</th>
+              <th className="border px-4 py-2 text-left">Used</th>
+              <th className="border px-4 py-2 text-left">Total</th>
+              <th className="border px-4 py-2 text-left">Device ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {systemInfo.diskUsage.map((disk, index) => (
+              <tr key={index} className="hover:bg-gray-100">
+                <td className="border px-4 py-2">{disk.mountedAs || "N/A"}</td>
+                <td className="border px-4 py-2">{disk.type || "N/A"}</td>
+                <td className="border px-4 py-2">{disk.free
+                    ? disk.free.split("\n").map((line: string, i: number) => (
+                        <span key={i}>
+                          {line}
+                          <br />
+                        </span>
+                      ))
+                    : "N/A"}</td>
+                <td className="border px-4 py-2">{disk.used
+                  ? disk.used.split("\n").map((line: string, i: number) => (
+                    <span key={i}>
+                      {line}
+                      <br />
+                    </span>
+                  ))
+                : "N/A"}</td>
+                <td className="border px-4 py-2">{disk.total
+                  ? disk.total.split("\n").map((line: string, i: number) => (
+                    <span key={i}>
+                      {line}
+                      <br />
+                    </span>
+                  ))
+                : "N/A"}</td>
+                <td className="border px-4 py-2">{disk.deviceId || "N/A"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
