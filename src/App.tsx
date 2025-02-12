@@ -1,6 +1,4 @@
-import { Sidebar, Navbar } from './components';
-import Dashboard from './components/Dashboard.tsx'; // 引入 Dashboard 組件
-import UserDetails from './components/UserDetails'; // 引入 UserDetails 組件
+import { Sidebar, Navbar, Dashboard, UserDetails, Software } from './components';
 import { useState } from 'react';
 
 const App = () => {
@@ -13,13 +11,13 @@ const App = () => {
   };
 
   return (
-    <div className='flex h-screen relative'>
+    <div className='relative flex h-screen'>
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} setCurrentPage={setCurrentPage} />
       <div className='flex flex-col flex-1 w-full'>
         <Navbar onMenuClick={toggleSidebar} />
-        <div className='flex-1 p-4 bg-gray-100 overflow-y-auto'>
+        <div className='flex-1 p-4 overflow-y-auto bg-gray-100'>
           {currentPage === 'Dashboard' && (
-            <Dashboard 
+            <Dashboard
               onUserClick={(id: number) => {
                 setCurrentUserId(id); // 設置選中使用者的 ID
                 setCurrentPage('UserDetails'); // 切換到 UserDetails 頁面
@@ -27,8 +25,8 @@ const App = () => {
             />
           )}
           {currentPage === 'UserDetails' && currentUserId !== null && (
-            <UserDetails 
-              userId={currentUserId} 
+            <UserDetails
+              userId={currentUserId}
               onBack={() => setCurrentPage('Dashboard')} // 返回 Dashboard
             />
           )}
@@ -38,6 +36,7 @@ const App = () => {
               <p>This is the Services page.</p>
             </div>
           )}
+          {currentPage === 'Software Package' && <Software />}
         </div>
       </div>
     </div>
